@@ -1,18 +1,27 @@
 import { useState } from "react";
 import s from "./GameImage.module.css";
-export function GameImage({ src, alt }) {
+export function GameCard({ src, alt }) {
   return (
-    <div className={s.img}>
-      <img src={src} alt={alt} />
+    <div className={""}>
+      <div className={s.img}>
+        <img src={src} alt={alt} />
+      </div>
+      <div className={s.description}>
+        <p className={s.title}>TItle</p>
+        <p className={s.price}>$4.99</p>
+      </div>
     </div>
   );
 }
+
+// TODO: style
 
 function getCurrentPageData(page, data) {
   let start = page * 5 - 5;
   let end = start + 5;
   return data.slice(start, end);
 }
+
 export function GameListHorizontal({ data }) {
   const [page, setPage] = useState(1);
   let currentPageData = getCurrentPageData(page, data);
@@ -34,7 +43,7 @@ export function GameListHorizontal({ data }) {
       </div>
       <div className={s.gameListHorizontal}>
         {currentPageData.map((el, index) => (
-          <GameImage src={el.src} alt={el.alt} key={index} />
+          <GameCard src={el.src} alt={el.alt} key={index} />
         ))}
       </div>
     </div>
