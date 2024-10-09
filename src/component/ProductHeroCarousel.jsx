@@ -1,6 +1,6 @@
 import { useState } from "react";
 import s from "./GameImageCarousel.module.css";
-export function GameImageCarousel({ data }) {
+export function ProductHeroCarousel({ data }) {
   const [page, setPage] = useState(1);
   let currentData = data[page - 1];
   function changePage(command) {

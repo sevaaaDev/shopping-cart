@@ -2,15 +2,7 @@ img {
   display: block;
   line-height: 0;
   border-radius: 0.5rem;
-}
-.img {
-  height: 200px;
-  width: 200px;
-}
-
-.gameListHorizontal {
-  display: flex;
-  gap: 0.5rem;
+  width: 100%;
 }
 
 p {
@@ -20,4 +12,5 @@ p {
 .title {
   font-weight: bold;
   font-size: 1.2rem;
+  margin-top: 1rem;
 }
