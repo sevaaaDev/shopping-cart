@@ -2,8 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
-import { HomePage } from "./pages/HomePage";
+import { HomePage, homePageLoader } from "./pages/HomePage";
 import { ShopPage } from "./pages/ShopPage";
+import { productLoader, ProductPage } from "./pages/ProductPage";
+import { CartPage } from "./pages/CartPage";
+import { ShopLayout, shopLoader } from "./layout/ShopLayout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -12,14 +15,35 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+        loader: homePageLoader,
       },
       {
         path: "shop",
-        element: <ShopPage />,
+        element: <ShopLayout />,
+        children: [
+          {
+            index: true,
+            element: <ShopPage />,
+            loader: shopLoader,
+          },
+        ],
       },
+      {
+        path: "product/:id",
+        element: <ProductPage />,
+        loader: productLoader,
+      },
+      { path: "cart", element: <CartPage /> },
     ],
   },
 ]);
+
+// TODO: Cart LOGO
+// TODO: style nav bar
+// TODO: Fix search bar
+// TODO: Api
+// TODO: Shop Page
+// TODO: Home Page
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
