@@ -3,10 +3,10 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import { HomePage, homePageLoader } from "./pages/HomePage";
-import { ShopPage } from "./pages/ShopPage";
+import { ShopPage, shopLoader, shopCategoryLoader } from "./pages/ShopPage";
 import { productLoader, ProductPage } from "./pages/ProductPage";
 import { CartPage } from "./pages/CartPage";
-import { ShopLayout, shopLoader } from "./layout/ShopLayout";
+import { categoriesLoader, ShopLayout } from "./layout/ShopLayout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,11 +20,17 @@ const router = createBrowserRouter([
       {
         path: "shop",
         element: <ShopLayout />,
+        loader: categoriesLoader,
         children: [
           {
             index: true,
             element: <ShopPage />,
             loader: shopLoader,
+          },
+          {
+            path: "category/:name",
+            element: <ShopPage />,
+            loader: shopCategoryLoader,
           },
         ],
       },
