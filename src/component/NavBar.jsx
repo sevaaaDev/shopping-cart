@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./NavBar.module.css";
-export function NavBar() {
+export function NavBar({ cart }) {
   return (
     <nav className={s.nav}>
       <NavLink to="/" className={s.logo}>
@@ -9,7 +9,7 @@ export function NavBar() {
       <SearchBar />
       <div className={s.wrapper}>
         <NavLink to="shop">Shop</NavLink> {/* change to styled navlink*/}
-        <NavLink to="cart">Cart</NavLink> {/* change to styled navlink*/}
+        <NavLink to="cart">Cart ({cart})</NavLink>
       </div>
     </nav>
   );

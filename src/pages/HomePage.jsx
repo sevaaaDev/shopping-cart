@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
-import { ProductListHorizontal } from "../component/GameImage";
-import { ProductHeroCarousel } from "../component/GameImageCarousel";
+import { ProductListHorizontal } from "../component/ProductListHorizontal";
+import { ProductHeroCarousel } from "../component/ProductHeroCarousel";
 
 const data = [
   {
@@ -58,10 +58,22 @@ const carousel = [
 
 export function HomePage() {
   let data = useLoaderData();
-  console.log(data);
   return (
     <div>
-      <ProductHeroCarousel data={data} />
+      <ProductListHorizontal data={data} />
     </div>
   );
+}
+
+export async function homePageLoader() {
+  let data = await fetch(
+    "https://fakestoreapi.com/products/category/electronics",
+  ).then((res) => res.json());
+
+  data = data.map((el) => ({
+    src: el.image,
+    title: el.title,
+    id: el.id,
+  }));
+  return data;
 }

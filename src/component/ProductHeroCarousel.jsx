@@ -1,5 +1,5 @@
 import { useState } from "react";
-import s from "./GameImageCarousel.module.css";
+import s from "./ProductHeroCarousel.module.css";
 export function ProductHeroCarousel({ data }) {
   const [page, setPage] = useState(1);
   let currentData = data[page - 1];
