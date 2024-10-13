@@ -1,17 +1,35 @@
 import { NavLink } from "react-router-dom";
-import s from "./NavBar.module.css";
+import styled from "styled-components";
+
+const Nav = styled.nav`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`;
+
+const Logo = styled(NavLink)`
+  margin-right: auto;
+  color: black;
+`;
+
+const Navlink = styled(NavLink)`
+  color: black;
+  text-decoration: none;
+  &.active {
+    text-decoration: underline;
+  }
+`;
+
 export function NavBar({ cart }) {
   return (
-    <nav className={s.nav}>
-      <NavLink to="/" className={s.logo}>
-        <h1>GameShop</h1>
-      </NavLink>
-      <SearchBar />
-      <div className={s.wrapper}>
-        <NavLink to="shop">Shop</NavLink> {/* change to styled navlink*/}
-        <NavLink to="cart">Cart ({cart})</NavLink>
-      </div>
-    </nav>
+    <Nav>
+      <Logo to="/">
+        <h1>Shopping</h1>
+      </Logo>
+      <Navlink to="/">Home</Navlink>
+      <Navlink to="shop">Shop</Navlink>
+      <Navlink to="cart">Cart ({cart})</Navlink>
+    </Nav>
   );
 }
 
