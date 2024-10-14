@@ -14,9 +14,28 @@ export async function productLoader({ params }) {
 
 export function ProductPage() {
   const data = useLoaderData();
-  const { setCartItems } = useOutletContext();
+  const { setCartItems, cartItems } = useOutletContext();
   function addtocart() {
-    setCartItems((items) => [...items, data]);
+    let newCartItems = [
+      ...cartItems,
+      {
+        ...data,
+        quantity: 1,
+        get totalPrice() {
+          return this.quantity * this.price;
+        },
+      },
+    ];
+    // if there are the same product in cart, combine them
+    setCartItems(
+      newCartItems.reduce((a, b) => {
+        if (a.at(-1)?.id === b.id) {
+          a.at(-1).quantity += b.quantity;
+          return a;
+        }
+        return [...a, b];
+      }, []),
+    );
   }
   return (
     <div>
