@@ -7,6 +7,7 @@ import { ShopPage, shopLoader, shopCategoryLoader } from "./pages/ShopPage";
 import { productLoader, ProductPage } from "./pages/ProductPage";
 import { CartPage } from "./pages/CartPage";
 import { categoriesLoader, ShopLayout } from "./layout/ShopLayout";
+import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",

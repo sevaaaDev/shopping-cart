@@ -1,5 +1,7 @@
 import { NavLink, Outlet, useLoaderData } from "react-router-dom";
 import s from "./ShopLayout.module.css";
+import styled from "styled-components";
+import { Container } from "../component/Container";
 
 export async function categoriesLoader() {
   const data = await fetch("https://fakestoreapi.com/products/categories").then(
@@ -11,26 +13,59 @@ export function ShopLayout() {
   const data = useLoaderData();
 
   return (
-    <div className={s.layout}>
+    <ShopContainer>
       <ShopNavBar categories={data} />
       <Outlet />
-    </div>
+    </ShopContainer>
   );
 }
+const ShopContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  ${Container}
+`;
 
+// TODO: put navbar in its own component
 function ShopNavBar({ categories }) {
   return (
-    <div>
-      <ul>
+    <nav>
+      <NavList>
         <li>
-          <NavLink to="/shop">All</NavLink>
+          <StyledNavLink to="/shop" end>
+            All
+          </StyledNavLink>
         </li>
         {categories.map((el, index) => (
           <li key={index}>
-            <NavLink to={"category/" + el}>{el}</NavLink>
+            <StyledNavLink to={"category/" + el}>{el}</StyledNavLink>
           </li>
         ))}
-      </ul>
-    </div>
+      </NavList>
+    </nav>
   );
 }
+
+const NavList = styled.ul`
+  list-style-type: none;
+  padding: 1rem 0rem;
+`;
+const StyledNavLink = styled(NavLink)`
+  display: block;
+  color: black;
+  opacity: 0.5;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+  &.pending {
+    opacity: 0.7;
+  }
+`;

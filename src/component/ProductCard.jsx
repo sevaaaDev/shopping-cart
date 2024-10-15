@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import s from "./ProductCard.module.css";
+// TODO: star rating icon
 export function ProductCard({ src, title, id, price }) {
   return (
     <NavCard className={""} to={`/product/${id}`}>
@@ -48,5 +49,3 @@ const ImgContainer = styled.div`
   justify-content: center;
   padding: 1rem;
 `;
-
-// TODO: style

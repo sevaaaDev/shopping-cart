@@ -7,7 +7,7 @@ function RootLayout() {
   const [cartItems, setCartItems] = useState([]);
   let numOfItems = cartItems.reduce((a, b) => a + b.quantity, 0);
   return (
-    <div className={s.container}>
+    <div>
       <NavBar cart={numOfItems} />
       <Outlet context={{ setCartItems, cartItems }} />
     </div>

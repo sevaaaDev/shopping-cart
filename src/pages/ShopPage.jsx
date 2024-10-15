@@ -20,18 +20,20 @@ export async function shopCategoryLoader({ params }) {
 
 export function ShopPage() {
   const data = useLoaderData();
-  const { state } = useNavigation();
+  const { state, location } = useNavigation();
+
   console.log(data);
-  if (state === "loading") {
-    return <div>loading</div>;
-  }
   return (
-    <div>
-      <ProductListGrid>
-        {data.map((el) => (
-          <ProductCard key={el.id} src={el.image} title={el.title} id={el.id} />
-        ))}
-      </ProductListGrid>
-    </div>
+    <ProductListGrid>
+      {data.map((el) => (
+        <ProductCard
+          key={el.id}
+          src={el.image}
+          title={el.title}
+          id={el.id}
+          price={el.price}
+        />
+      ))}
+    </ProductListGrid>
   );
 }
