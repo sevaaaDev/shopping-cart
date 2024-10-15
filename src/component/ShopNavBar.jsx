@@ -28,7 +28,7 @@ const StyledNavLink = styled(NavLink)`
   color: black;
   opacity: 0.5;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 0;
   font-weight: bold;
   font-size: 1.2rem;
 
