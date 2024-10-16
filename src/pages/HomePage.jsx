@@ -1,79 +1,35 @@
 import { useLoaderData } from "react-router-dom";
 import { ProductListHorizontal } from "../component/ProductListHorizontal";
-import { ProductHeroCarousel } from "../component/ProductHeroCarousel";
-
-const data = [
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/200/200?fit=cover&position=top",
-    alt: "kakakkak",
-  },
-];
-
-const carousel = [
-  {
-    src: "https://placecats.com/800/300",
-    alt: "kakakkak",
-  },
-  {
-    src: "https://placecats.com/millie/800/300",
-    alt: "kakakkak",
-  },
-];
+import { ProductHero } from "../component/ProductHeroCarousel";
+import { CategoryGrid } from "../component/CategoryGrid";
 
 export function HomePage() {
   let data = useLoaderData();
+
+  console.log(data);
   return (
     <div>
-      <ProductListHorizontal data={data} />
+      <ProductHero data={data.at(-1)} />
+      <CategoryGrid data={data.slice(0, 4)} />
     </div>
   );
 }
 
 export async function homePageLoader() {
-  let data = await fetch(
-    "https://fakestoreapi.com/products/category/electronics",
-  ).then((res) => res.json());
+  // fetch 1 item from every category
+  let category = ["jewelery", "men's clothing", "women's clothing"];
 
-  data = data.map((el) => ({
-    src: el.image,
-    title: el.title,
-    id: el.id,
-  }));
+  let data = await Promise.all([
+    ...category.map((el) =>
+      fetch(`https://fakestoreapi.com/products/category/${el}?limit=1`).then(
+        (res) => res.json(),
+      ),
+    ),
+    fetch(`https://fakestoreapi.com/products/14`).then((res) => res.json()),
+    fetch(`https://fakestoreapi.com/products/16`).then((res) => res.json()),
+  ]);
+
+  data = data.flat();
+  data = data.map((el) => ({ ...el, src: el.image }));
   return data;
 }
