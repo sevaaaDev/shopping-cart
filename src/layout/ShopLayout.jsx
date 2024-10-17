@@ -23,6 +23,9 @@ export function ShopLayout() {
 }
 const ShopContainer = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   ${Container}
+  @media (width < 780px) {
+    display: block;
+  }
 `;

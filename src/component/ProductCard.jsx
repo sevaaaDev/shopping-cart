@@ -9,7 +9,7 @@ export function ProductCard({ src, title, id, price }) {
         <img src={src} alt={title} />
       </ImgContainer>
       <Description>
-        <OneLineTitle>{title}</OneLineTitle>
+        <OneLineTitle title={title}>{title}</OneLineTitle>
         <Price>${price}</Price>
         <p>V 3.99</p>
       </Description>
@@ -35,7 +35,6 @@ const Price = styled.p`
 `;
 
 const OneLineTitle = styled.p`
-  width: 250px;
   font-size: 1.2rem;
   text-overflow: ellipsis;
   white-space: pre;
