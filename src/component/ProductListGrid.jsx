@@ -6,10 +6,8 @@ export function ProductListGrid({ children }) {
 const ListGrid = styled.div`
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(max(26%, 150px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(max(20%, 150px), 1fr));
   gap: 0.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 1px 1px 5px inset #ddd;
   & img {
     max-width: 100%;
   }

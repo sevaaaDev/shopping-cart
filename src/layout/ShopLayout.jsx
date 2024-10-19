@@ -25,6 +25,7 @@ const ShopContainer = styled.div`
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   ${Container}
+  margin-top: 1rem;
   @media (width < 780px) {
     display: block;
   }

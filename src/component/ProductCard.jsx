@@ -19,14 +19,17 @@ export function ProductCard({ src, title, id, price }) {
 
 const NavCard = styled(NavLink)`
   font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  border-radius: 1rem;
+  color: white;
   text-decoration: none;
-  box-shadow: 1px 1px 10px #ddd;
+  box-shadow: 0px -1px 4px #ddd;
+  background: #222;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Description = styled.div`
-  margin: 0.5rem;
+  margin: 1rem;
 `;
 
 const Price = styled.p`
@@ -43,7 +46,6 @@ const OneLineTitle = styled.p`
 
 const ImgContainer = styled.div`
   background: white;
-  border-radius: 1rem 1rem 0 0;
   display: flex;
   justify-content: center;
   padding: 1rem;
