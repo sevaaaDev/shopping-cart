@@ -5,7 +5,7 @@ export function NavBar({ cart }) {
   return (
     <StyledNav>
       <Logo to="/">
-        <h1>Shopping</h1>
+        <h1>Robbed.store</h1>
       </Logo>
       <Navlink to="/">Home</Navlink>
       <Navlink to="shop">Shop</Navlink>
@@ -18,23 +18,25 @@ const StyledNav = styled.nav`
   display: flex;
   gap: 1rem;
   align-items: center;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  background-color: white;
+  padding: 1.5rem 0;
   ${Container}
+  background-color: white;
 `;
 
 const Logo = styled(NavLink)`
   margin-right: auto;
+  text-decoration: none;
   color: black;
 `;
 
 const Navlink = styled(NavLink)`
+  padding: 0.5rem 0;
   color: black;
   text-decoration: none;
-  &.active {
-    text-decoration: underline;
+
+  &.active,
+  &:hover {
+    border-bottom: 2px solid black;
   }
 `;
 
