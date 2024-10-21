@@ -50,7 +50,7 @@ const Hero = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 4rem 4rem;
+  padding: 8rem 4rem;
   text-align: center;
   max-width: 900px;
   margin: auto;
