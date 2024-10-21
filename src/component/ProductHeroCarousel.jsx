@@ -1,11 +1,7 @@
-import { useState } from "react";
-import s from "./ProductHeroCarousel.module.css";
 import styled from "styled-components";
-import { Container } from "./Container";
 import { NavLink } from "react-router-dom";
 import bgImg from "../perry-merrity-ii-gPrJi5R4RAk-unsplash.webp";
-// TODO: hero design on mobile
-export function ProductHero({ data }) {
+export function ProductHero() {
   return (
     <Hero>
       <Content>

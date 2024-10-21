@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import { ProductListHorizontal } from "../component/ProductListHorizontal";
 import { ProductHero } from "../component/ProductHeroCarousel";
 import { CategoryGrid } from "../component/CategoryGrid";
 
