@@ -20,21 +20,25 @@ export function CategoryGrid({ data }) {
 }
 
 const Wrapper = styled.div`
-  margin: 5rem 0;
+  padding: 5rem 0;
   h2 {
     text-align: center;
+    margin-bottom: 2rem;
   }
 `;
 
 const ImgCard = styled.div`
   position: relative;
   background-color: white;
-  box-shadow: 1px 1px 10px #ddd;
   padding: 0.5rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   & img {
     width: 100%;
     height: 100%;
     object-fit: scale-down;
+  }
+  &:hover {
+    opacity: 0.9;
   }
 `;
 
@@ -49,22 +53,7 @@ const Text = styled.p`
 `;
 
 const Grid = styled.div`
-  &:hover ${ImgCard} {
-    opacity: 0.4;
-  }
-  &:hover ${ImgCard}:hover {
-    opacity: 1;
-    scale: 1.1;
-    translate: 0px 10px;
-    z-index: 99;
-  }
-  & > * {
-    pointer-events: auto;
-  }
-  pointer-events: none;
-  margin: 1rem auto;
-  padding: 1rem;
-  box-shadow: 1px 1px 10px inset #ddd;
+  margin: 0 auto;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
