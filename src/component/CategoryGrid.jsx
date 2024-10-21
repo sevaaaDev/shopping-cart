@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { toCapitalize } from "../utils/toCapitalize";
 
 export function CategoryGrid({ data }) {
   return (
@@ -11,7 +12,7 @@ export function CategoryGrid({ data }) {
             <NavLink to={`shop/category/${el.category}`}>
               <img src={el.src} alt={el.title} />
             </NavLink>
-            <Text>{el.category}</Text>
+            <Text>{toCapitalize(el.category)}</Text>
           </ImgCard>
         ))}
       </Grid>

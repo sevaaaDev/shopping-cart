@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { toCapitalize } from "../utils/toCapitalize";
 export function ShopNavBar({ categories }) {
   // TODO: add margin to h3
   // add padding to ul
@@ -9,12 +10,14 @@ export function ShopNavBar({ categories }) {
       <NavList>
         <li>
           <StyledNavLink to="/shop" end>
-            All
+            All product
           </StyledNavLink>
         </li>
         {categories.map((el, index) => (
           <li key={index}>
-            <StyledNavLink to={"category/" + el}>{el}</StyledNavLink>
+            <StyledNavLink to={"category/" + el}>
+              {toCapitalize(el)}
+            </StyledNavLink>
           </li>
         ))}
       </NavList>

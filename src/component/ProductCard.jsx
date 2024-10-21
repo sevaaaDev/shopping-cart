@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import s from "./ProductCard.module.css";
+import { toCapitalize } from "../utils/toCapitalize";
 // TODO: star rating icon
 export function ProductCard({ src, title, id, price, category }) {
   return (
     <NavCard className={""} to={`/product/${id}`}>
-      <ImgContainer className={s.img}>
+      <ImgContainer>
         <img src={src} alt={title} />
       </ImgContainer>
       <Description>
@@ -16,11 +16,6 @@ export function ProductCard({ src, title, id, price, category }) {
       </Description>
     </NavCard>
   );
-}
-
-// TODO: utils
-function toCapitalize(word) {
-  return word[0].toUpperCase() + word.slice(1);
 }
 
 const NavCard = styled(NavLink)`
