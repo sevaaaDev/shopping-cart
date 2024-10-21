@@ -6,4 +6,16 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #fafafa;
+}
+img {
+  display: block;
+  line-height: 0;
+  border-radius: 0.5rem;
+  /*width: 200px;
+* TODO: this bugs made the product card img width large (default)
+* */
+
+  object-fit: contain;
+  aspect-ratio: 1;
 }
