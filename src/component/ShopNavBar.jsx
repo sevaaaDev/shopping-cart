@@ -4,8 +4,8 @@ export function ShopNavBar({ categories }) {
   // TODO: add margin to h3
   // add padding to ul
   return (
-    <nav>
-      <h3>Category</h3>
+    <StyledNav>
+      <H3>Category</H3>
       <NavList>
         <li>
           <StyledNavLink to="/shop" end>
@@ -18,10 +18,17 @@ export function ShopNavBar({ categories }) {
           </li>
         ))}
       </NavList>
-    </nav>
+    </StyledNav>
   );
 }
 
+const StyledNav = styled.nav`
+  padding: 0 2rem 0 0;
+`;
+
+const H3 = styled.h3`
+  font-size: 2rem;
+`;
 const NavList = styled.ul`
   list-style-type: none;
   overflow: auto;
@@ -36,7 +43,7 @@ const NavList = styled.ul`
 const StyledNavLink = styled(NavLink)`
   display: block;
   color: black;
-  opacity: 0.3;
+  opacity: 0.5;
   text-decoration: none;
   padding: 0.5rem 1rem 0.5rem 0;
   font-size: 1.2rem;
@@ -46,10 +53,7 @@ const StyledNavLink = styled(NavLink)`
     opacity: 1;
   }
 
-  &:hover {
-    opacity: 0.5;
-  }
-  &.pending {
+  &:hover:not(.active) {
     opacity: 0.7;
   }
 `;

@@ -7,7 +7,7 @@ const ListGrid = styled.div`
   padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(max(20%, 150px), 1fr));
-  gap: 0.5rem;
+  gap: 1rem;
   & img {
     max-width: 100%;
   }

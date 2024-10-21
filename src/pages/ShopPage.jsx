@@ -31,6 +31,7 @@ export function ShopPage() {
           title={el.title}
           id={el.id}
           price={el.price}
+          category={el.category}
         />
       ))}
     </ProductListGrid>

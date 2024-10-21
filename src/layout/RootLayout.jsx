@@ -17,6 +17,7 @@ function RootLayout() {
 
 const StyledRoot = styled.div`
   position: relative;
+  background-color: #f0f0f0;
 `;
 
 export default RootLayout;

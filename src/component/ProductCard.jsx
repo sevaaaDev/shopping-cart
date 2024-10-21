@@ -2,39 +2,59 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import s from "./ProductCard.module.css";
 // TODO: star rating icon
-export function ProductCard({ src, title, id, price }) {
+export function ProductCard({ src, title, id, price, category }) {
   return (
     <NavCard className={""} to={`/product/${id}`}>
       <ImgContainer className={s.img}>
         <img src={src} alt={title} />
       </ImgContainer>
       <Description>
-        <OneLineTitle title={title}>{title}</OneLineTitle>
         <Price>${price}</Price>
+        <OneLineTitle title={title}>{title}</OneLineTitle>
+        <Category>{toCapitalize(category)}</Category>
         <p>V 3.99</p>
       </Description>
     </NavCard>
   );
 }
 
+// TODO: utils
+function toCapitalize(word) {
+  return word[0].toUpperCase() + word.slice(1);
+}
+
 const NavCard = styled(NavLink)`
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: black;
   text-decoration: none;
-  box-shadow: 0px -1px 4px #ddd;
-  background: #222;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   &:hover {
-    opacity: 0.7;
+    opacity: 0.9;
   }
 `;
 
 const Description = styled.div`
-  margin: 1rem;
+  padding: 0.5rem;
+  position: relative;
+  p:last-child {
+    margin-top: 0.5rem;
+  }
 `;
 
 const Price = styled.p`
   font-weight: bold;
   font-size: 1.2rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(-100%);
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+`;
+
+const Category = styled.p`
+  opacity: 0.6;
 `;
 
 const OneLineTitle = styled.p`

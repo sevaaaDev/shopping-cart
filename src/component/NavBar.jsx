@@ -20,23 +20,23 @@ const StyledNav = styled.nav`
   align-items: center;
   padding: 1.5rem 0;
   ${Container}
-  background-color: white;
+  background-color: black;
 `;
 
 const Logo = styled(NavLink)`
   margin-right: auto;
   text-decoration: none;
-  color: black;
+  color: white;
 `;
 
 const Navlink = styled(NavLink)`
   padding: 0.5rem 0;
-  color: black;
+  color: white;
   text-decoration: none;
 
   &.active,
   &:hover {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
   }
 `;
 
