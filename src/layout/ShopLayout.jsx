@@ -1,5 +1,4 @@
-import { NavLink, Outlet, useLoaderData } from "react-router-dom";
-import s from "./ShopLayout.module.css";
+import { Outlet, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../component/Container";
 import { ShopNavBar } from "../component/ShopNavBar";
@@ -26,9 +25,9 @@ const ShopContainer = styled.div`
   grid-template-columns: auto minmax(0, 1fr);
   max-width: 1400px;
   margin-inline: auto;
-
+  ${Container}
   margin-top: 2rem;
-  @media (width < 780px) {
+  @media (width < 768px) {
     display: block;
   }
 `;
