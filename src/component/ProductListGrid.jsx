@@ -4,7 +4,6 @@ export function ProductListGrid({ children }) {
 }
 
 const ListGrid = styled.div`
-  padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(max(20%, 150px), 1fr));
   gap: 1rem;
