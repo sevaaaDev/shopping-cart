@@ -24,7 +24,9 @@ export function ShopLayout() {
 const ShopContainer = styled.div`
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  ${Container}
+  max-width: 1400px;
+  margin-inline: auto;
+
   margin-top: 2rem;
   @media (width < 780px) {
     display: block;
