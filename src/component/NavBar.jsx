@@ -5,9 +5,7 @@ export function NavBar({ cart }) {
   return (
     <StyledNav>
       <Logo to="/">
-        <h1>
-          Robbed.<span>store</span>
-        </h1>
+        Robbed.<span>store</span>
       </Logo>
       <Navlink to="/">Home</Navlink>
       <Navlink to="shop">Shop</Navlink>
@@ -29,6 +27,7 @@ const Logo = styled(NavLink)`
   margin-right: auto;
   text-decoration: none;
   color: white;
+  font-weight: bold;
   span {
     color: #00bfff;
   }

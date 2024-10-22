@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import bgImg from "../perry-merrity-ii-gPrJi5R4RAk-unsplash.webp";
+// TODO: remove br, use max width
 export function ProductHero() {
   return (
     <Hero>
@@ -35,7 +36,7 @@ const Button = styled(NavLink)`
   }
 `;
 
-const Heading = styled.h2`
+const Heading = styled.h1`
   color: white;
   font-size: 3.5rem;
   margin-bottom: 1rem;

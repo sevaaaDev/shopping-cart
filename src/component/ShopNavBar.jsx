@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { toCapitalize } from "../utils/toCapitalize";
 export function ShopNavBar({ categories }) {
-  // TODO: add margin to h3
-  // add padding to ul
   return (
     <StyledNav>
-      <H3>Category</H3>
+      <H2>Category</H2>
       <NavList>
         <li>
           <StyledNavLink to="/shop" end>
@@ -29,8 +27,11 @@ const StyledNav = styled.nav`
   padding: 0 2rem 0 0;
 `;
 
-const H3 = styled.h3`
+const H2 = styled.h2`
   font-size: 2rem;
+  @media (width <= 768px) {
+    display: none;
+  }
 `;
 const NavList = styled.ul`
   list-style-type: none;
