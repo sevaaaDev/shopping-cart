@@ -16,14 +16,15 @@ export function ProductHero() {
             bare hands”
             <br />- Stacy
           </p>
-          <Button to="/shop">Shop Now</Button>
+          <ButtonCTA to="/shop">Shop Now</ButtonCTA>
         </div>
       </Content>
     </Hero>
   );
 }
 
-const Button = styled(NavLink)`
+// TODO: component button
+export const ButtonCTA = styled(NavLink)`
   background-color: #00bfff;
   display: inline-block;
   padding: 0.5em 0.75em;

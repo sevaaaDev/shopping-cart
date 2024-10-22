@@ -1,8 +1,7 @@
-import {
-  useLoaderData,
-  useNavigation,
-  useOutletContext,
-} from "react-router-dom";
+import { useLoaderData, useOutletContext } from "react-router-dom";
+import { BackButton } from "../component/BackButton";
+import { ProductDetail } from "../component/ProductDetail";
+import styled from "styled-components";
 
 export async function productLoader({ params }) {
   const data = await fetch(
@@ -15,33 +14,17 @@ export async function productLoader({ params }) {
 export function ProductPage() {
   const data = useLoaderData();
   const { setCartItems, cartItems } = useOutletContext();
-  function addtocart() {
-    let newCartItems = [
-      ...cartItems,
-      {
-        ...data,
-        quantity: 1,
-        get totalPrice() {
-          return this.quantity * this.price;
-        },
-      },
-    ];
-    // if there are the same product in cart, combine them
-    setCartItems(
-      newCartItems.reduce((a, b) => {
-        if (a.at(-1)?.id === b.id) {
-          a.at(-1).quantity += b.quantity;
-          return a;
-        }
-        return [...a, b];
-      }, []),
-    );
-  }
   return (
-    <div>
-      <img src={data.image} alt="" />
-      <p className="title">{data.title}</p>
-      <button onClick={addtocart}>Add to cart</button>
-    </div>
+    <Wrapper>
+      <BackButton />
+      <ProductDetail
+        data={data}
+        setCartItems={setCartItems}
+        cartItems={cartItems}
+      />
+    </Wrapper>
   );
 }
+const Wrapper = styled.div`
+  padding-inline: 2rem;
+`;
