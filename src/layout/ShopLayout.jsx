@@ -15,8 +15,9 @@ export function ShopLayout() {
   const data = useLoaderData();
   const location = useLocation();
   let title = toCapitalize(
-    location.pathname.slice(location.pathname.lastIndexOf("/") + 1),
+    decodeURI(location.pathname.slice(location.pathname.lastIndexOf("/") + 1)),
   );
+
   if (location.pathname === "/shop") {
     title = "All Product";
   }
