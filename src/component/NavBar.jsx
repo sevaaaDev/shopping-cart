@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Container } from "./Container";
 import styled from "styled-components";
-export function NavBar({ cart }) {
+export function NavBar({ cart, showCart }) {
   return (
     <StyledNav>
       <Logo to="/">
@@ -9,7 +9,8 @@ export function NavBar({ cart }) {
       </Logo>
       <Navlink to="/">Home</Navlink>
       <Navlink to="shop">Shop</Navlink>
-      <Navlink to="cart">Cart ({cart})</Navlink>
+      {/* <Navlink to="cart">Cart ({cart})</Navlink>*/}
+      <button onClick={showCart}>Cart ({cart})</button>
     </StyledNav>
   );
 }
