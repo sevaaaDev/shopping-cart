@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-export function SlidingCart({ show, setShow }) {
+import { CartPage } from "../pages/CartPage";
+export function SlidingCart({ show, setShow, setCartItems, cartItems }) {
   const cartElement = useRef(null);
   const overlayElement = useRef(null);
   let [umount, setUmount] = useState(true);
@@ -17,16 +18,16 @@ export function SlidingCart({ show, setShow }) {
       setUmount(false);
       if (!cart) return;
       if (!overlay) return;
-      cart.animate(slideIn, { duration: 500, fill: "forwards" });
-      overlay.animate(fadeIn, { duration: 500, fill: "forwards" });
+      cart.animate(slideIn, { duration: 300, fill: "forwards" });
+      overlay.animate(fadeIn, { duration: 300, fill: "forwards" });
 
       return;
     }
     if (!cart) return;
     if (!overlay) return;
-    overlay.animate(fadeOut, { duration: 500, fill: "forwards" });
+    overlay.animate(fadeOut, { duration: 300, fill: "forwards" });
     const animation = cart.animate(slideOut, {
-      duration: 500,
+      duration: 300,
       fill: "forwards",
     });
     animation.onfinish = handleRemove;
@@ -36,12 +37,15 @@ export function SlidingCart({ show, setShow }) {
     !umount &&
     createPortal(
       <>
-        <Overlay ref={overlayElement} />
+        <Overlay ref={overlayElement} onClick={() => setShow(!show)} />
         <StyledSlide ref={cartElement}>
           <Header>
             <p>Cart</p>
             <button onClick={() => setShow(!show)}>X</button>
           </Header>
+          <div>
+            <CartPage setCartItems={setCartItems} cartItems={cartItems} />
+          </div>
         </StyledSlide>
       </>,
       document.getElementById("portal"),
@@ -56,7 +60,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   background-color: black;
-  opacity: 0.5;
+  opacity: 0;
   z-index: 99998;
 `;
 const StyledSlide = styled.div`
@@ -64,18 +68,21 @@ const StyledSlide = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: black;
-  color: white;
+  background-color: #fafafa;
+  color: black;
   width: 100%;
   max-height: 100vh;
-  max-width: 400px;
+  max-width: 500px;
+  transform: translateX(100%);
   z-index: 99999;
+  padding: 0 2rem;
 `;
 
 const Header = styled.div`
-  padding: 2rem 2rem;
+  padding: 2rem 0;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid black;
 `;
 
 const slideIn = [

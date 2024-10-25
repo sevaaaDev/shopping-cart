@@ -5,8 +5,8 @@ export function BtnQuantity({ setQuantity, quantity, increment }) {
       disabled={!increment && quantity === 1}
       onClick={
         increment
-          ? () => setQuantity((q) => q + 1)
-          : () => setQuantity((q) => q - 1)
+          ? () => setQuantity(quantity + 1)
+          : () => setQuantity(quantity - 1)
       }
     >
       {increment ? (
@@ -37,7 +37,6 @@ export function BtnQuantity({ setQuantity, quantity, increment }) {
 }
 const IncDecBtn = styled.button`
   line-height: 0;
-  padding: 0.2rem;
   border-radius: 0px;
   background-color: inherit;
 `;

@@ -12,7 +12,12 @@ function RootLayout() {
     <StyledRoot>
       <NavBar cart={numOfItems} showCart={() => setShow(!show)} />
       <Outlet context={{ setCartItems, cartItems }} />
-      <SlidingCart show={show} setShow={setShow} />
+      <SlidingCart
+        show={show}
+        setShow={setShow}
+        setCartItems={setCartItems}
+        cartItems={cartItems}
+      />
     </StyledRoot>
   );
 }
