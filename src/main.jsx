@@ -8,42 +8,47 @@ import { productLoader, ProductPage } from "./pages/ProductPage";
 import { CartPage } from "./pages/CartPage";
 import { categoriesLoader, ShopLayout } from "./layout/ShopLayout";
 import "./index.css";
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+          loader: homePageLoader,
+        },
+        {
+          path: "shop",
+          element: <ShopLayout />,
+          loader: categoriesLoader,
+          children: [
+            {
+              index: true,
+              element: <ShopPage />,
+              loader: shopLoader,
+            },
+            {
+              path: "category/:name",
+              element: <ShopPage />,
+              loader: shopCategoryLoader,
+            },
+          ],
+        },
+        {
+          path: "product/:id",
+          element: <ProductPage />,
+          loader: productLoader,
+        },
+        { path: "cart", element: <CartPage /> },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-        loader: homePageLoader,
-      },
-      {
-        path: "shop",
-        element: <ShopLayout />,
-        loader: categoriesLoader,
-        children: [
-          {
-            index: true,
-            element: <ShopPage />,
-            loader: shopLoader,
-          },
-          {
-            path: "category/:name",
-            element: <ShopPage />,
-            loader: shopCategoryLoader,
-          },
-        ],
-      },
-      {
-        path: "product/:id",
-        element: <ProductPage />,
-        loader: productLoader,
-      },
-      { path: "cart", element: <CartPage /> },
-    ],
+    basename: "/shopping-cart",
   },
-]);
+);
 
 // TODO: Cart LOGO
 // TODO: style nav bar
