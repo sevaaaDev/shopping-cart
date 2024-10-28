@@ -13,7 +13,7 @@ export function Content({ setCartItems, cartItems, data }) {
         ...data,
         quantity: quantity,
         get totalPrice() {
-          return this.quantity * this.price;
+          return Math.round(this.quantity * this.price * 100) / 100;
         },
       },
     ];
