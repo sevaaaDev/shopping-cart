@@ -68,6 +68,7 @@ const Logo = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: bold;
+  font-size: 1.5rem;
   span {
     color: #6495ed;
   }
