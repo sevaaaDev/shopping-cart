@@ -113,7 +113,7 @@ function Trash() {
       width="24"
       height="24"
       fill="red"
-      class="bi bi-trash"
+      className="bi bi-trash"
       viewBox="0 0 16 16"
     >
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
@@ -131,7 +131,8 @@ const DeleteBtn = styled.button`
 // TODO: checkout btn
 
 const Card = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3fr;
   align-items: center;
   gap: 0.5rem;
   color: black;
@@ -147,13 +148,15 @@ const Card = styled.div`
 const Content = styled.div`
   padding-right: 1rem;
   width: 100%;
+  div + div {
+    margin-top: 1rem;
+  }
 `;
 
 const Category = styled.p`
   opacity: 0.6;
 `;
 const ImgWrapper = styled.div`
-  width: 100px;
   background-color: white;
   padding: 0.5rem;
 `;
@@ -163,7 +166,6 @@ const Quantity = styled.div`
   align-items: center;
 `;
 const Col = styled.div`
-  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: start;
