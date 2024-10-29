@@ -1,8 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toCapitalize } from "../utils/toCapitalize";
-import star from "../assets/star.svg";
-// TODO: star rating icon
+import { loadingAnimation } from "../utils/animation";
 export function ProductCard({ src, title, id, price, category, rating, sold }) {
   return (
     <NavCard className={""} to={`/product/${id}`}>
@@ -20,6 +19,35 @@ export function ProductCard({ src, title, id, price, category, rating, sold }) {
     </NavCard>
   );
 }
+
+export function ProductCardSkeleton() {
+  let arr = Array(10).fill(null);
+  console.log(arr);
+  return arr.map((el, index) => (
+    <div key={index}>
+      <Img></Img>
+      <div>
+        <Text $height={24} />
+        <Text $height={24} $width={20} />
+      </div>
+    </div>
+  ));
+}
+
+const Img = styled.div`
+  aspect-ratio: 1;
+  background-color: #eee;
+  animation: ${loadingAnimation} 0.5s infinite;
+`;
+
+const Text = styled.p`
+  background-color: #eee;
+  height: ${(props) => props.$height || 16}px;
+  width: ${(props) => props.$width || 100}%;
+  margin-top: ${(props) => props.$mtop || 0.5}rem;
+  margin-bottom: ${(props) => props.$mbot || 0}rem;
+  animation: ${loadingAnimation} 0.5s infinite;
+`;
 
 function Star() {
   return (
@@ -91,4 +119,5 @@ const ImgContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem;
+  aspect-ratio: 1;
 `;

@@ -1,41 +1,48 @@
-import { useLoaderData, useNavigation } from "react-router-dom";
-import { ProductCard } from "../component/ProductCard";
+import { defer, Await, useLoaderData, useNavigation } from "react-router-dom";
+import { Suspense } from "react";
+import { ProductCard, ProductCardSkeleton } from "../component/ProductCard";
 import { ProductListGrid } from "../component/ProductListGrid";
 
 export async function shopLoader() {
-  const data = await fetch(`https://fakestoreapi.com/products/`).then((res) =>
+  const data = fetch(`https://fakestoreapi.com/products/`).then((res) =>
     res.json(),
   );
-  return data;
+  return defer({ data: data });
 }
 
 export async function shopCategoryLoader({ params }) {
   const { name } = params;
-  const data = await fetch(
-    `https://fakestoreapi.com/products/category/${name}`,
-  ).then((res) => res.json());
-  return data;
+  const data = fetch(`https://fakestoreapi.com/products/category/${name}`).then(
+    (res) => res.json(),
+  );
+  console.log(data);
+  return defer({ data: data });
 }
 
 export function ShopPage() {
-  const data = useLoaderData();
+  const { data } = useLoaderData();
   const { state, location } = useNavigation();
 
-  console.log(data);
   return (
     <ProductListGrid>
-      {data.map((el) => (
-        <ProductCard
-          key={el.id}
-          src={el.image}
-          title={el.title}
-          id={el.id}
-          price={el.price}
-          category={el.category}
-          rating={el.rating.rate}
-          sold={el.rating.count}
-        />
-      ))}
+      <Suspense fallback={<ProductCardSkeleton />}>
+        <Await resolve={data}>
+          {(res) =>
+            res.map((el) => (
+              <ProductCard
+                key={el.id}
+                src={el.image}
+                title={el.title}
+                id={el.id}
+                price={el.price}
+                category={el.category}
+                rating={el.rating.rate}
+                sold={el.rating.count}
+              />
+            ))
+          }
+        </Await>
+      </Suspense>
     </ProductListGrid>
   );
 }
