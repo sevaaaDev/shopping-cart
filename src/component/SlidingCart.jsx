@@ -4,40 +4,9 @@ import { createPortal } from "react-dom";
 import { CartPage } from "../pages/CartPage";
 export function SlidingCart({ show, setShow, setCartItems, cartItems }) {
   const cartElement = useRef(null);
-  const overlayElement = useRef(null);
-  let [umount, setUmount] = useState(true);
-
-  function handleRemove() {
-    setUmount(true);
-  }
-  // TODO: understand this sorcery
-  useEffect(() => {
-    const cart = cartElement.current;
-    const overlay = overlayElement.current;
-    if (show) {
-      setUmount(false);
-      if (!cart) return;
-      if (!overlay) return;
-      cart.animate(slideIn, { duration: 300, fill: "forwards" });
-      overlay.animate(fadeIn, { duration: 300, fill: "forwards" });
-
-      return;
-    }
-    if (!cart) return;
-    if (!overlay) return;
-    overlay.animate(fadeOut, { duration: 300, fill: "forwards" });
-    const animation = cart.animate(slideOut, {
-      duration: 300,
-      fill: "forwards",
-    });
-    animation.onfinish = handleRemove;
-  }, [umount, show]);
-
-  return (
-    !umount &&
-    createPortal(
-      <>
-        <Overlay ref={overlayElement} onClick={() => setShow(!show)} />
+  return createPortal(
+    <>
+      <SlideInAnimate setShow={setShow} show={show} nodeRef={cartElement}>
         <StyledSlide ref={cartElement}>
           <Header>
             <p>Cart</p>
@@ -49,8 +18,47 @@ export function SlidingCart({ show, setShow, setCartItems, cartItems }) {
             <CartPage setCartItems={setCartItems} cartItems={cartItems} />
           </div>
         </StyledSlide>
-      </>,
-      document.getElementById("portal"),
+      </SlideInAnimate>
+    </>,
+    document.getElementById("portal"),
+  );
+}
+
+function SlideInAnimate({ show, setShow, children, nodeRef }) {
+  const [umount, setUmount] = useState(true);
+  const overlayElement = useRef(null);
+  // TODO: fade in overlay
+  // FIXME: flicker animation
+  // the element will mount with default css (translate 0)
+  // but then it will get enter class with translate 100% (move it outside screen)
+  // if the render lag, it will show the element with translate 0 before adding the class, causing flicker
+  useEffect(() => {
+    const cart = nodeRef.current;
+    if (show) {
+      setUmount(false);
+      if (!cart) return;
+      cart.classList.add("entering");
+      cart.scrollTop;
+      cart.classList.add("entered");
+      cart.classList.remove("entering");
+      return;
+    }
+    if (!cart) return;
+    cart.classList.remove("entered");
+    cart.classList.add("exiting");
+    cart.scrollTop;
+    cart.classList.add("exited");
+    cart.classList.remove("exiting");
+    setTimeout(() => {
+      setUmount(true);
+    }, 300);
+  }, [umount, show]);
+  return (
+    !umount && (
+      <>
+        <Overlay ref={overlayElement} onClick={() => setShow(!show)} />
+        {children}
+      </>
     )
   );
 }
@@ -100,9 +108,22 @@ const StyledSlide = styled.div`
   width: 100%;
   max-height: 100vh;
   max-width: 500px;
-  transform: translateX(100%);
   z-index: 99999;
   padding: 0 2rem;
+  &.entering {
+    transform: translateX(100%);
+  }
+  &.entered {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+  &.exiting {
+    transform: translateX(0);
+  }
+  &.exited {
+    transform: translateX(100%);
+    transition: transform 300ms;
+  }
 `;
 
 const Header = styled.div`
@@ -113,22 +134,6 @@ const Header = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const slideIn = [
-  {
-    transform: "translateX(100%)",
-  },
-  {
-    transform: "translateX(0)",
-  },
-];
-const slideOut = [
-  {
-    transform: "translateX(0)",
-  },
-  {
-    transform: "translateX(100%)",
-  },
-];
 const fadeIn = [
   {
     opacity: 0,
